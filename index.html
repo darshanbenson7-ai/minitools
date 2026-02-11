@@ -1,97 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GameZone</title>
 <style>
-body{
-margin:0;
-font-family:Arial;
-background:#1e3c72;
-color:white;
-text-align:center;
-}
-h1{padding:20px;}
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
-padding:20px;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
 }
-.card{
-background:white;
-color:black;
-padding:15px;
-border-radius:12px;
-}
-button{
-padding:6px 10px;
-margin-top:8px;
-border:none;
-border-radius:6px;
-background:#ff4b2b;
+.box{
+background:red;
+padding:40px;
 color:white;
-cursor:pointer;
 }
-input{padding:5px;margin:5px;}
 </style>
 </head>
 <body>
 
-<h1>🎮 GameZone 🎮</h1>
+<h1>TEST GRID</h1>
 
 <div class="grid">
-
-<div class="card">
-<h3>Dice</h3>
-<button onclick="dice()">Roll</button>
-<p id="g1"></p>
+<div class="box">1</div>
+<div class="box">2</div>
+<div class="box">3</div>
+<div class="box">4</div>
+<div class="box">5</div>
+<div class="box">6</div>
 </div>
 
-<div class="card">
-<h3>Coin Flip</h3>
-<button onclick="coin()">Flip</button>
-<p id="g2"></p>
-</div>
-
-<div class="card">
-<h3>Random Number</h3>
-<button onclick="randomNum()">Generate</button>
-<p id="g3"></p>
-</div>
-
-<div class="card">
-<h3>Guess (1-5)</h3>
-<input id="guess">
-<button onclick="checkGuess()">Check</button>
-<p id="g4"></p>
-</div>
-
-<div class="card">
-<h3>Even or Odd</h3>
-<input id="num">
-<button onclick="evenodd()">Check</button>
-<p id="g5"></p>
-</div>
-
-<div class="card">
-<h3>Password</h3>
-<button onclick="pass()">Generate</button>
-<p id="g6"></p>
-</div>
-
-<div class="card">
-<h3>Love %</h3>
-<button onclick="love()">Check</button>
-<p id="g7"></p>
-</div>
-
-<div class="card">
-<h3>Random Color</h3>
-<button onclick="color()">Change</button>
-<p id="g8"></p>
-</div>
-
-<div class="card">
-<h3>Click Counter</h3>
-<but
+</body>
+</html>
