@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Mini Game Hub</title>
+<title>GameZone - Mini Poki</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body {
+margin: 0;
 font-family: Arial, sans-serif;
+background: linear-gradient(135deg,#1e3c72,#2a5298);
+color: white;
 text-align: center;
-background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
-padding: 20px;
 }
 
 h1 {
-color: white;
+padding: 20px;
 font-size: 40px;
 }
 
-.game {
-background: white;
+.grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 20px;
 padding: 20px;
-margin: 20px auto;
-width: 320px;
+}
+
+.card {
+background: white;
+color: black;
 border-radius: 15px;
-box-shadow: 0 0 15px rgba(0,0,0,0.2);
+padding: 15px;
+box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 button {
-padding: 8px 15px;
-margin-top: 10px;
-cursor: pointer;
+padding: 8px 12px;
 border: none;
 border-radius: 8px;
-background: #6a11cb;
+background: #ff4b2b;
 color: white;
-font-weight: bold;
+cursor: pointer;
+margin-top: 10px;
 }
 
 input {
@@ -43,97 +50,16 @@ margin: 5px;
 </head>
 <body>
 
-<h1>🎮 Mini Game Hub 🎮</h1>
+<h1>🎮 GameZone 🎮</h1>
 
-<!-- Reaction Time Game -->
-<div class="game">
-<h3>⚡ Reaction Time</h3>
-<button onclick="startReaction()">Start</button>
-<p id="reactionResult"></p>
+<div class="grid">
+
+<!-- 1 Reaction -->
+<div class="card">
+<h3>⚡ Reaction</h3>
+<button onclick="reaction()">Start</button>
+<p id="r1"></p>
 </div>
 
-<!-- Click Speed Game -->
-<div class="game">
-<h3>🖱 Click Speed Test (5 sec)</h3>
-<button onclick="startClickTest()">Start</button>
-<p id="clickResult"></p>
-</div>
-
-<!-- Number Guessing Game -->
-<div class="game">
-<h3>🔢 Number Guess (1-10)</h3>
-<input id="guessInput" placeholder="Enter number">
-<button onclick="checkGuess()">Guess</button>
-<p id="guessResult"></p>
-</div>
-
-<!-- Color Guess Game -->
-<div class="game">
-<h3>🎨 Color Guess</h3>
-<p id="colorText">Guess the color: RED / BLUE / GREEN</p>
-<input id="colorInput" placeholder="Type color">
-<button onclick="checkColor()">Check</button>
-<p id="colorResult"></p>
-</div>
-
-<script>
-
-// Reaction Game
-let reactionStart;
-function startReaction() {
-document.getElementById("reactionResult").innerText = "Wait for green...";
-setTimeout(() => {
-document.body.style.background = "green";
-reactionStart = new Date().getTime();
-document.body.onclick = function() {
-let reactionTime = new Date().getTime() - reactionStart;
-document.getElementById("reactionResult").innerText = "Your reaction: " + reactionTime + " ms";
-document.body.style.background = "";
-document.body.onclick = null;
-};
-}, Math.random() * 3000 + 1000);
-}
-
-// Click Speed
-let clicks = 0;
-function startClickTest() {
-clicks = 0;
-document.getElementById("clickResult").innerText = "Click fast!";
-document.onclick = () => clicks++;
-setTimeout(() => {
-document.onclick = null;
-document.getElementById("clickResult").innerText = "You clicked " + clicks + " times!";
-}, 5000);
-}
-
-// Number Guess
-let randomNumber = Math.floor(Math.random() * 10) + 1;
-function checkGuess() {
-let guess = document.getElementById("guessInput").value;
-if (guess == randomNumber) {
-document.getElementById("guessResult").innerText = "Correct! 🎉";
-randomNumber = Math.floor(Math.random() * 10) + 1;
-} else {
-document.getElementById("guessResult").innerText = "Wrong! Try again.";
-}
-}
-
-// Color Guess
-let colors = ["red", "blue", "green"];
-let chosenColor = colors[Math.floor(Math.random() * colors.length)];
-
-function checkColor() {
-let userColor = document.getElementById("colorInput").value.toLowerCase();
-if (userColor === chosenColor) {
-document.getElementById("colorResult").innerText = "Correct! 🎉";
-} else {
-document.getElementById("colorResult").innerText = "Wrong! It was " + chosenColor;
-}
-chosenColor = colors[Math.floor(Math.random() * colors.length)];
-}
-
-</script>
-
-</body>
-</html>
-
+<!-- 2 Click Speed -->
+<div clas
