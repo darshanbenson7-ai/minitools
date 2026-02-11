@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Click Speed</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#141e30,#243b55);
+color:white;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+}
+
+button{
+padding:20px 40px;
+font-size:20px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+}
+
+a{margin-top:20px;color:white;opacity:0.7;text-decoration:none;}
+</style>
+</head>
+<body>
+
+<h1>🖱 Click Speed (5 Seconds)</h1>
+<button onclick="clickGame()" id="btn">START</button>
+<h2 id="score"></h2>
+<a href="index.html">⬅ Back</a>
+
+<script>
+let count=0;
+let timeLeft=5;
+let playing=false;
+
+function clickGame(){
+if(!playing){
+playing=true;
+count=0;
+timeLeft=5;
+document.getElementById("btn").innerText="CLICK!";
+let timer=setInterval(()=>{
+timeLeft--;
+if(timeLeft==0){
+clearInterval(timer);
+playing=false;
+document.getElementById("btn").innerText="START";
+document.getElementById("score").innerText="Total Clicks: "+count;
+}
+},1000);
+}else{
+count++;
+}
+}
+</script>
+
+</body>
+</html>
