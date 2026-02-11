@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mini Tools Hub</title>
+<style>
+body {
+font-family: Arial;
+text-align: center;
+background: #f4f4f4;
+padding: 20px;
+}
+.tool {
+background: white;
+padding: 20px;
+margin: 20px auto;
+width: 300px;
+border-radius: 10px;
+box-shadow: 0 0 10px #ccc;
+}
+button {
+padding: 8px 15px;
+margin-top: 10px;
+cursor: pointer;
+}
+input {
+padding: 5px;
+margin: 5px;
+}
+</style>
+</head>
+<body>
+
+<h1>Mini Tools Hub</h1>
+
+<!-- Profit Calculator -->
+<div class="tool">
+<h3>Profit Calculator</h3>
+<input id="cost" placeholder="Cost Price"><br>
+<input id="sell" placeholder="Selling Price"><br>
+<button onclick="calculateProfit()">Calculate</button>
+<p id="profitResult"></p>
+</div>
+
+<!-- Age Calculator -->
+<div class="tool">
+<h3>Age Calculator</h3>
+<input type="date" id="dob"><br>
+<button onclick="calculateAge()">Calculate Age</button>
+<p id="ageResult"></p>
+</div>
+
+<!-- Random Team Picker -->
+<div class="tool">
+<h3>Random Team Picker</h3>
+<input id="names" placeholder="Enter names separated by comma"><br>
+<button onclick="pickName()">Pick Random</button>
+<p id="randomResult"></p>
+</div>
+
+<script>
+function calculateProfit() {
+let cost = parseFloat(document.getElementById("cost").value);
+let sell = parseFloat(document.getElementById("sell").value);
+let profit = sell - cost;
+document.getElementById("profitResult").innerText = "Profit: ₹" + profit;
+}
+
+function calculateAge() {
+let dob = new Date(document.getElementById("dob").value);
+let today = new Date();
+let age = today.getFullYear() - dob.getFullYear();
+document.getElementById("ageResult").innerText = "Age: " + age + " years";
+}
+
+function pickName() {
+let names = document.getElementById("names").value.split(",");
+let random = names[Math.floor(Math.random() * names.length)];
+document.getElementById("randomResult").innerText = "Selected: " + random;
+}
+</script>
+
+</body>
+</html>
