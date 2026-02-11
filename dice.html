@@ -2,43 +2,75 @@
 <html>
 <head>
 <title>Dice Game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body{
-text-align:center;
+margin:0;
 font-family:Arial;
-background:#667eea;
+background:linear-gradient(135deg,#ff416c,#ff4b2b);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
 color:white;
-padding-top:100px;
+text-align:center;
 }
+
+h1{
+font-size:40px;
+}
+
+#dice{
+font-size:100px;
+margin:20px;
+transition:0.3s;
+}
+
 button{
-padding:10px 20px;
-font-size:18px;
+padding:15px 30px;
+font-size:20px;
 border:none;
-border-radius:8px;
-background:#ff4b2b;
-color:white;
+border-radius:30px;
 cursor:pointer;
+background:white;
+color:#ff416c;
+font-weight:bold;
+transition:0.3s;
 }
+
+button:hover{
+transform:scale(1.1);
+}
+
 a{
-display:block;
-margin-top:30px;
+margin-top:20px;
 color:white;
+text-decoration:none;
 }
 </style>
 </head>
 <body>
 
-<h1>🎲 Dice Game</h1>
+<h1>🎲 Dice Roller</h1>
 
-<button onclick="roll()">Roll Dice</button>
-<h2 id="result"></h2>
+<div id="dice">🎲</div>
 
-<a href="index.html">⬅ Back to Home</a>
+<button onclick="roll()">ROLL</button>
+
+<a href="index.html">⬅ Back</a>
 
 <script>
 function roll(){
-document.getElementById("result").innerText=
-Math.floor(Math.random()*6)+1;
+let dice = document.getElementById("dice");
+
+dice.style.transform = "rotate(360deg)";
+
+setTimeout(()=>{
+let numbers = ["⚀","⚁","⚂","⚃","⚄","⚅"];
+dice.innerText = numbers[Math.floor(Math.random()*6)];
+dice.style.transform = "rotate(0deg)";
+},300);
 }
 </script>
 
