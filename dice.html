@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dice Game</title>
+<title>Dice Battle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body{
 margin:0;
 font-family:Arial;
-background:linear-gradient(135deg,#ff416c,#ff4b2b);
+background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -18,13 +18,14 @@ text-align:center;
 }
 
 h1{
-font-size:40px;
+text-shadow:0 0 20px #00f7ff;
 }
 
-#dice{
+.dice-container{
+display:flex;
+gap:60px;
 font-size:100px;
-margin:20px;
-transition:0.3s;
+margin:30px;
 }
 
 button{
@@ -33,46 +34,61 @@ font-size:20px;
 border:none;
 border-radius:30px;
 cursor:pointer;
-background:white;
-color:#ff416c;
-font-weight:bold;
+background:#111;
+color:#00f7ff;
+border:2px solid #00f7ff;
+box-shadow:0 0 15px #00f7ff;
 transition:0.3s;
 }
 
 button:hover{
-transform:scale(1.1);
+box-shadow:0 0 30px #ff00ff;
+border-color:#ff00ff;
+}
+
+#result{
+margin-top:20px;
+font-size:22px;
+text-shadow:0 0 10px #ff00ff;
 }
 
 a{
-margin-top:20px;
+margin-top:25px;
 color:white;
 text-decoration:none;
+opacity:0.7;
 }
 </style>
 </head>
 <body>
 
-<h1>🎲 Dice Roller</h1>
+<h1>🎲 Dice Battle 🎲</h1>
 
-<div id="dice">🎲</div>
+<div class="dice-container">
+<div id="player">⚀</div>
+<div id="computer">⚀</div>
+</div>
 
-<button onclick="roll()">ROLL</button>
+<button onclick="play()">ROLL</button>
+
+<div id="result"></div>
 
 <a href="index.html">⬅ Back</a>
 
 <script>
-function roll(){
-let dice = document.getElementById("dice");
+let sound = new Audio("https://www.soundjay.com/buttons/sounds/button-09.mp3");
 
-dice.style.transform = "rotate(360deg)";
+function play(){
+sound.currentTime = 0;
+sound.play();
 
-setTimeout(()=>{
-let numbers = ["⚀","⚁","⚂","⚃","⚄","⚅"];
-dice.innerText = numbers[Math.floor(Math.random()*6)];
-dice.style.transform = "rotate(0deg)";
-},300);
-}
-</script>
+let dice = ["⚀","⚁","⚂","⚃","⚄","⚅"];
 
-</body>
-</html>
+let playerRoll = Math.floor(Math.random()*6);
+let computerRoll = Math.floor(Math.random()*6);
+
+document.getElementById("player").innerText = dice[playerRoll];
+document.getElementById("computer").innerText = dice[computerRoll];
+
+if(playerRoll > computerRoll){
+document.getElementById("result").innerText = "🔥 You Win
