@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Mini Tools Hub</title>
+<title>Mini Game Hub</title>
 <style>
 body {
-font-family: Arial;
+font-family: Arial, sans-serif;
 text-align: center;
-background: #f4f4f4;
+background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
 padding: 20px;
 }
-.tool {
+
+h1 {
+color: white;
+font-size: 40px;
+}
+
+.game {
 background: white;
 padding: 20px;
 margin: 20px auto;
-width: 300px;
-border-radius: 10px;
-box-shadow: 0 0 10px #ccc;
+width: 320px;
+border-radius: 15px;
+box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
+
 button {
 padding: 8px 15px;
 margin-top: 10px;
 cursor: pointer;
+border: none;
+border-radius: 8px;
+background: #6a11cb;
+color: white;
+font-weight: bold;
 }
+
 input {
 padding: 5px;
 margin: 5px;
@@ -30,54 +43,97 @@ margin: 5px;
 </head>
 <body>
 
-<h1>Mini Tools Hub</h1>
+<h1>🎮 Mini Game Hub 🎮</h1>
 
-<!-- Profit Calculator -->
-<div class="tool">
-<h3>Profit Calculator</h3>
-<input id="cost" placeholder="Cost Price"><br>
-<input id="sell" placeholder="Selling Price"><br>
-<button onclick="calculateProfit()">Calculate</button>
-<p id="profitResult"></p>
+<!-- Reaction Time Game -->
+<div class="game">
+<h3>⚡ Reaction Time</h3>
+<button onclick="startReaction()">Start</button>
+<p id="reactionResult"></p>
 </div>
 
-<!-- Age Calculator -->
-<div class="tool">
-<h3>Age Calculator</h3>
-<input type="date" id="dob"><br>
-<button onclick="calculateAge()">Calculate Age</button>
-<p id="ageResult"></p>
+<!-- Click Speed Game -->
+<div class="game">
+<h3>🖱 Click Speed Test (5 sec)</h3>
+<button onclick="startClickTest()">Start</button>
+<p id="clickResult"></p>
 </div>
 
-<!-- Random Team Picker -->
-<div class="tool">
-<h3>Random Team Picker</h3>
-<input id="names" placeholder="Enter names separated by comma"><br>
-<button onclick="pickName()">Pick Random</button>
-<p id="randomResult"></p>
+<!-- Number Guessing Game -->
+<div class="game">
+<h3>🔢 Number Guess (1-10)</h3>
+<input id="guessInput" placeholder="Enter number">
+<button onclick="checkGuess()">Guess</button>
+<p id="guessResult"></p>
+</div>
+
+<!-- Color Guess Game -->
+<div class="game">
+<h3>🎨 Color Guess</h3>
+<p id="colorText">Guess the color: RED / BLUE / GREEN</p>
+<input id="colorInput" placeholder="Type color">
+<button onclick="checkColor()">Check</button>
+<p id="colorResult"></p>
 </div>
 
 <script>
-function calculateProfit() {
-let cost = parseFloat(document.getElementById("cost").value);
-let sell = parseFloat(document.getElementById("sell").value);
-let profit = sell - cost;
-document.getElementById("profitResult").innerText = "Profit: ₹" + profit;
+
+// Reaction Game
+let reactionStart;
+function startReaction() {
+document.getElementById("reactionResult").innerText = "Wait for green...";
+setTimeout(() => {
+document.body.style.background = "green";
+reactionStart = new Date().getTime();
+document.body.onclick = function() {
+let reactionTime = new Date().getTime() - reactionStart;
+document.getElementById("reactionResult").innerText = "Your reaction: " + reactionTime + " ms";
+document.body.style.background = "";
+document.body.onclick = null;
+};
+}, Math.random() * 3000 + 1000);
 }
 
-function calculateAge() {
-let dob = new Date(document.getElementById("dob").value);
-let today = new Date();
-let age = today.getFullYear() - dob.getFullYear();
-document.getElementById("ageResult").innerText = "Age: " + age + " years";
+// Click Speed
+let clicks = 0;
+function startClickTest() {
+clicks = 0;
+document.getElementById("clickResult").innerText = "Click fast!";
+document.onclick = () => clicks++;
+setTimeout(() => {
+document.onclick = null;
+document.getElementById("clickResult").innerText = "You clicked " + clicks + " times!";
+}, 5000);
 }
 
-function pickName() {
-let names = document.getElementById("names").value.split(",");
-let random = names[Math.floor(Math.random() * names.length)];
-document.getElementById("randomResult").innerText = "Selected: " + random;
+// Number Guess
+let randomNumber = Math.floor(Math.random() * 10) + 1;
+function checkGuess() {
+let guess = document.getElementById("guessInput").value;
+if (guess == randomNumber) {
+document.getElementById("guessResult").innerText = "Correct! 🎉";
+randomNumber = Math.floor(Math.random() * 10) + 1;
+} else {
+document.getElementById("guessResult").innerText = "Wrong! Try again.";
 }
+}
+
+// Color Guess
+let colors = ["red", "blue", "green"];
+let chosenColor = colors[Math.floor(Math.random() * colors.length)];
+
+function checkColor() {
+let userColor = document.getElementById("colorInput").value.toLowerCase();
+if (userColor === chosenColor) {
+document.getElementById("colorResult").innerText = "Correct! 🎉";
+} else {
+document.getElementById("colorResult").innerText = "Wrong! It was " + chosenColor;
+}
+chosenColor = colors[Math.floor(Math.random() * colors.length)];
+}
+
 </script>
 
 </body>
 </html>
+
