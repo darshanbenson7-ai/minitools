@@ -1,51 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>GameZone - Mini Poki</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameZone</title>
 <style>
-body {
-margin: 0;
-font-family: Arial, sans-serif;
-background: linear-gradient(135deg,#1e3c72,#2a5298);
-color: white;
-text-align: center;
+body{
+margin:0;
+font-family:Arial;
+background:#1e3c72;
+color:white;
+text-align:center;
 }
-
-h1 {
-padding: 20px;
-font-size: 40px;
+h1{padding:20px;}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+padding:20px;
 }
-
-.grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-gap: 20px;
-padding: 20px;
+.card{
+background:white;
+color:black;
+padding:15px;
+border-radius:12px;
 }
-
-.card {
-background: white;
-color: black;
-border-radius: 15px;
-padding: 15px;
-box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+button{
+padding:6px 10px;
+margin-top:8px;
+border:none;
+border-radius:6px;
+background:#ff4b2b;
+color:white;
+cursor:pointer;
 }
-
-button {
-padding: 8px 12px;
-border: none;
-border-radius: 8px;
-background: #ff4b2b;
-color: white;
-cursor: pointer;
-margin-top: 10px;
-}
-
-input {
-padding: 5px;
-margin: 5px;
-}
+input{padding:5px;margin:5px;}
 </style>
 </head>
 <body>
@@ -54,154 +42,56 @@ margin: 5px;
 
 <div class="grid">
 
-<!-- 1 Reaction -->
 <div class="card">
-<h3>⚡ Reaction</h3>
-<button onclick="reaction()">Start</button>
-<p id="r1"></p>
-</div>
-
-<!-- 2 Click Speed -->
-<div class="card">
-<h3>🖱 Click Speed</h3>
-<button onclick="clickTest()">Start</button>
-<p id="r2"></p>
-</div>
-
-<!-- 3 Guess Number -->
-<div class="card">
-<h3>🔢 Guess Number</h3>
-<input id="g1">
-<button onclick="guess()">Guess</button>
-<p id="r3"></p>
-</div>
-
-<!-- 4 Dice Roll -->
-<div class="card">
-<h3>🎲 Dice</h3>
+<h3>Dice</h3>
 <button onclick="dice()">Roll</button>
-<p id="r4"></p>
+<p id="g1"></p>
 </div>
 
-<!-- 5 Coin Flip -->
 <div class="card">
-<h3>🪙 Coin Flip</h3>
+<h3>Coin Flip</h3>
 <button onclick="coin()">Flip</button>
-<p id="r5"></p>
+<p id="g2"></p>
 </div>
 
-<!-- 6 Random Color -->
 <div class="card">
-<h3>🎨 Random Color</h3>
-<button onclick="color()">Generate</button>
-<p id="r6"></p>
+<h3>Random Number</h3>
+<button onclick="randomNum()">Generate</button>
+<p id="g3"></p>
 </div>
 
-<!-- 7 Even or Odd -->
 <div class="card">
-<h3>➗ Even or Odd</h3>
-<input id="g2">
+<h3>Guess (1-5)</h3>
+<input id="guess">
+<button onclick="checkGuess()">Check</button>
+<p id="g4"></p>
+</div>
+
+<div class="card">
+<h3>Even or Odd</h3>
+<input id="num">
 <button onclick="evenodd()">Check</button>
-<p id="r7"></p>
+<p id="g5"></p>
 </div>
 
-<!-- 8 Random Name -->
 <div class="card">
-<h3>👥 Random Picker</h3>
-<input id="g3" placeholder="A,B,C">
-<button onclick="pick()">Pick</button>
-<p id="r8"></p>
+<h3>Password</h3>
+<button onclick="pass()">Generate</button>
+<p id="g6"></p>
 </div>
 
-<!-- 9 Password Generator -->
 <div class="card">
-<h3>🔐 Password</h3>
-<button onclick="password()">Generate</button>
-<p id="r9"></p>
-</div>
-
-<!-- 10 Love Calculator -->
-<div class="card">
-<h3>❤️ Love %</h3>
-<input id="l1" placeholder="Name 1">
-<input id="l2" placeholder="Name 2">
+<h3>Love %</h3>
 <button onclick="love()">Check</button>
-<p id="r10"></p>
+<p id="g7"></p>
 </div>
 
+<div class="card">
+<h3>Random Color</h3>
+<button onclick="color()">Change</button>
+<p id="g8"></p>
 </div>
 
-<script>
-
-// 1 Reaction
-function reaction(){
-let start = Date.now();
-setTimeout(()=>{
-let time = Date.now() - start;
-document.getElementById("r1").innerText="Reaction: "+time+" ms";
-}, Math.random()*2000+1000);
-}
-
-// 2 Click Speed
-function clickTest(){
-let clicks=0;
-document.onclick=()=>clicks++;
-setTimeout(()=>{
-document.onclick=null;
-document.getElementById("r2").innerText="Clicks: "+clicks;
-},3000);
-}
-
-// 3 Guess
-let num=Math.floor(Math.random()*10)+1;
-function guess(){
-let g=document.getElementById("g1").value;
-document.getElementById("r3").innerText=(g==num)?"Correct!":"Try again";
-}
-
-// 4 Dice
-function dice(){
-document.getElementById("r4").innerText="🎲 "+(Math.floor(Math.random()*6)+1);
-}
-
-// 5 Coin
-function coin(){
-document.getElementById("r5").innerText=Math.random()>0.5?"Heads":"Tails";
-}
-
-// 6 Color
-function color(){
-let c="#"+Math.floor(Math.random()*16777215).toString(16);
-document.body.style.background=c;
-document.getElementById("r6").innerText=c;
-}
-
-// 7 Even Odd
-function evenodd(){
-let n=document.getElementById("g2").value;
-document.getElementById("r7").innerText=(n%2==0)?"Even":"Odd";
-}
-
-// 8 Random Picker
-function pick(){
-let names=document.getElementById("g3").value.split(",");
-let r=names[Math.floor(Math.random()*names.length)];
-document.getElementById("r8").innerText=r;
-}
-
-// 9 Password
-function password(){
-let p=Math.random().toString(36).slice(-8);
-document.getElementById("r9").innerText=p;
-}
-
-// 10 Love
-function love(){
-let percent=Math.floor(Math.random()*101);
-document.getElementById("r10").innerText=percent+"% ❤️";
-}
-
-</script>
-
-</body>
-</html>
+<div class="card">
+<h3>Click Counter</h3>
+<but
